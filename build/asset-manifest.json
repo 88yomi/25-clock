@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/25-clock/static/css/main.96030127.css",
+    "main.js": "/25-clock/static/js/main.596e2ef3.js",
+    "static/media/beep.mp3": "/25-clock/static/media/beep.9575010c260f5b98a6cc.mp3",
+    "index.html": "/25-clock/index.html",
+    "main.96030127.css.map": "/25-clock/static/css/main.96030127.css.map",
+    "main.596e2ef3.js.map": "/25-clock/static/js/main.596e2ef3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.96030127.css",
+    "static/js/main.596e2ef3.js"
+  ]
+}

@@ -1,4 +1,126 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none !important;
 }
 
+html {
+  font-family: "Arima Madurai", serif;
+  text-transform: capitalize;
+}
+
+body {
+  height: 100%;
+  text-align: center;
+  background-color: #000;
+  color: #fff;
+}
+
+@keyframes blinking {
+  from {opacity: 100%;}
+  to {opacity: 50%;}
+}
+
+button {
+  padding: 0.3rem 0.5rem;
+  margin-left: 0.5rem;
+  margin-top: 0.5rem;
+  text-transform: uppercase;
+  border-radius: 5px;
+}
+
+main {
+  width: 80%;
+  height: auto;
+  max-height: 90vh;
+  max-width: 90vw;
+  margin: 0 auto;
+}
+
+main h1 {
+  font-family: "Fugaz One", sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 1rem;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+#timer-label {
+  border: 1px solid red;
+  visibility: inherit;
+  font-weight: 500;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+}
+
+#timer-label #time-left {
+  font-size: 3rem;
+  font-weight: 300;
+  font-family: "Orbitron", serif;
+}
+
+.timer-on {
+  animation: blinking 1s ease-in-out 0s infinite normal none;
+  /* color: rgb(134, 185, 147); */
+  color: rgb(32, 187, 32);
+}
+
+.set-timer {
+  margin-bottom: 0rem;
+  border: 1px solid red;
+  margin-bottom: 2rem;
+}
+
+.set-timer #session,
+.set-timer #break {
+  margin-bottom: 3rem;
+}
+
+.set-timer #session-label,
+.set-timer #break-label {
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.set-timer #session-length,
+.set-timer #break-length {
+  font-size: 1.5rem;
+  font-weight: 300;
+  font-family: "Orbitron", serif;
+}
+
+.buttons {
+  border: 1px solid red;
+  margin-bottom: 2rem;
+}
+
+.buttons button {
+  font-size: 1.3rem;
+  margin-left: 1.5rem;
+  width: 4.5rem;
+  text-transform: capitalize;
+}
+
+footer {
+  display: block;
+  color: #090a09;
+  background-color: #f1ffff;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2.5rem;
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+ .set-timer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+} 
+}

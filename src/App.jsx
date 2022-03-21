@@ -5,6 +5,7 @@ import sound from './beep.mp3';
 
 import Button from './components/Button';
 import SetTime from './SetTime';
+import Footer from './components/Footer';
 
 function App() {
 	const [sessionLength, setSessionLength] = useState(25);
@@ -117,7 +118,7 @@ function App() {
 
 	const countDisplay = (mins, secs) => {
 		return (
-			<div>
+			<div className={running ? "timer-on" : null}>
 				{`${mins.toString().length === 1
 					? `0${mins}`
 					: mins}:${secs.toString().length === 1
@@ -127,9 +128,23 @@ function App() {
 	}
 
 	return (
-		<div className="App">
+		<>
+		<main>
 			<h1>25 + 5 Clock</h1>
 
+			<section id="timer-label">
+				{breakElem.current
+					? "break"
+					: "session"
+				}
+				<span id="time-left">
+					{!breakElem.current
+						? countDisplay(minutes, seconds)
+						: countDisplay(breakMin, breakSec)
+					}
+				</span>
+			</section>
+			
 			<section className="set-timer">
 				<SetTime
 					kind='session'
@@ -144,23 +159,11 @@ function App() {
 				/>
 			</section>
 
-			<section id="timer-label">
-				{breakElem.current
-					? "break"
-					: "session"
-				}
-				<span id="time-left">
-					{!breakElem.current
-						? countDisplay(minutes, seconds)
-						: countDisplay(breakMin, breakSec)
-					}
-				</span>
-			</section>
 
 			<section className="buttons">
 				<Button
 					id="start_stop"
-					text="▶/■"
+					text={running ? "Stop" : "Start"}
 					handleClick={handleStartStop}
 				/>
 
@@ -171,7 +174,9 @@ function App() {
 				/>
 			</section>
 			<audio id="beep" src={sound} ref={beep} />
-		</div>
+		</main>
+		<Footer />
+		</>
 	);
 }
 

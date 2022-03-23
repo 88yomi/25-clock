@@ -10,3 +10,4 @@
 - [Markdown Previewer](https://github.com/88yomi/markdown-previewer)
 - [Drum Machine](https://github.com/88yomi/drum-machine)
 - [25 + 5 Clock](https://github.com/88yomi/25-clock)
+- [Calculator](https://github.com/88yomi/basic-calculator)

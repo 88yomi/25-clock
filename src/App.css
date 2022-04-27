@@ -82,12 +82,12 @@ main h1 {
 .set-timer #session-label,
 .set-timer #break-label {
   font-weight: 500;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
 
 .set-timer #session-length,
 .set-timer #break-length {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: 300;
   font-family: "Orbitron", serif;
 }
@@ -117,10 +117,14 @@ footer {
   width: 100%;
 }
 
-@media screen and (min-width: 768px) {
- .set-timer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-} 
+@media screen and (min-width: 768px) { 
+  html {
+    font-size: 18px;
+  }
+  
+  .set-timer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  } 
 }

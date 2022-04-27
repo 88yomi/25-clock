@@ -1,10 +1,11 @@
 import './App.css';
 import { useState, useRef, useEffect } from 'react';
 
-import sound from './beep.mp3';
+import TimerSetter from './components/TimerSetter';
+import ButtonsComp from './components/ButtonsComp';
+import TimerLabel from './components/TimerLabel';
 
-import Button from './components/Button';
-import SetTime from './SetTime';
+import sound from './beep.mp3';
 import Footer from './components/Footer';
 
 function App() {
@@ -19,12 +20,6 @@ function App() {
 	const stopwatch = useRef(null);
 	const breakElem = useRef(null);
 	const beep = useRef(null);
-
-	let minutes = Math.floor(time / (60 * 1000));
-	let seconds = (time / 1000) % 60;
-
-	let breakMin = Math.floor(breakTime / (60 * 1000));
-	let breakSec = (breakTime / 1000) % 60;
 
 	const countdown = () => {
 		setTime(prevState => prevState - 1000);
@@ -60,38 +55,6 @@ function App() {
 		beep.current.currentTime = 0;
 	}
 
-	const handleCrement = (e) => {
-		if (!running) {
-			switch (e.target.name) {
-				case "session-increment":
-					if (sessionLength < 60) {
-						setTime(time => time + (1000 * 60));
-						setSessionLength(length => length + 1);
-					}
-					break;
-				case "session-decrement":
-					if (sessionLength > 1) {
-						setTime(time => time - (1000 * 60));
-						setSessionLength(length => length - 1);
-					}
-					break;
-				case "break-decrement":
-					if (breakLength > 1) {
-						setBreakLength(prevBreak => prevBreak - 1);
-						setBreakTime(prevTime => prevTime - (1000 * 60));
-					}
-					break;
-				case "break-increment":
-					if (breakLength < 60) {
-						setBreakLength(prevBreak => prevBreak + 1);
-						setBreakTime(prevTime => prevTime + (1000 * 60));
-					}
-					break;
-				default:
-					return null;
-			}
-		}
-	}
 
 	// play sound at 00:00
 	useEffect(() => {
@@ -112,7 +75,6 @@ function App() {
 		}
 	}
 
-
 	// break end
 	if (breakTime < 0 && !stopwatch.current) {
 		clearInterval(breakElem.current);
@@ -121,63 +83,34 @@ function App() {
 		handleStartStop();
 	}
 
-	const countDisplay = (mins, secs) => {
-		return (
-			<div className={running ? "timer-on" : null}>
-				{`${mins.toString().length === 1
-					? `0${mins}`
-					: mins}:${secs.toString().length === 1
-						? `0${secs}`
-						: secs}`}
-			</div>)
-	}
 
 	return (
 		<>
 			<main>
 				<h1>25 + 5 Clock</h1>
 
-				<section id="timer-label">
-					{breakElem.current
-						? "break"
-						: "session"
-					}
-					<span id="time-left">
-						{!breakElem.current
-							? countDisplay(minutes, seconds)
-							: countDisplay(breakMin, breakSec)
-						}
-					</span>
-				</section>
+				 <TimerLabel 
+          breakElem={breakElem}
+					time={time}
+					breakTime={breakTime}
+					running={running}
+        />
+				
+				<TimerSetter
+					sessionLength={sessionLength}
+					breakLength={breakLength}
+					running={running}
+					setTime={setTime}
+					setSessionLength={setSessionLength}
+					setBreakLength={setBreakLength}
+					setBreakTime={setBreakTime}
+				/>
 
-				<section className="set-timer">
-					<SetTime
-						kind='session'
-						length={sessionLength}
-						handleCrement={handleCrement}
-					/>
-
-					<SetTime
-						kind='break'
-						length={breakLength}
-						handleCrement={handleCrement}
-					/>
-				</section>
-
-
-				<section className="buttons">
-					<Button
-						id="start_stop"
-						text={running ? "Stop" : "Start"}
-						handleClick={handleStartStop}
-					/>
-
-					<Button
-						id="reset"
-						text="reset"
-						handleClick={handleReset}
-					/>
-				</section>
+				<ButtonsComp
+					running={running}
+					handleStartStop={handleStartStop}
+					handleReset={handleReset}
+				/>
 				<audio id="beep" src={sound} ref={beep} />
 			</main>
 			<Footer />
